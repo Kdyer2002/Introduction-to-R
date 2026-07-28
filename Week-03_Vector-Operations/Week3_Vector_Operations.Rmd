@@ -1,0 +1,55 @@
+---
+title: "HW3"
+author: "Kayla Dyer"
+date: "2025-09-14"
+output: word_document
+---
+## Given vectors in R
+```{r}
+x <- 2:6
+y <- seq(from = 1, to = 13, by = 3)
+z <- c(1,2,4,7,11)
+names.1 <- c("Kelly", "Jim", "Jeff", "Jennifer", "Daniel", "Drew")
+names.2 <- c("Nate", "Christine", "Bob", "Danielle", "Brian", "Monica")
+```
+## (a) Add 2 to every element in z
+```{r}
+z + 2
+```
+## (b) Multiply vectors x and y element-by-element
+```{r}
+x*y
+```
+## (c) Print the first, second, and fifth elements of names.1
+```{r}
+names.1[c(1, 2, 5)]
+```
+## (d) Print a logical vector that is TRUE if the element of y is equal to 4 and FALSE otherwise
+```{r}
+y == 4
+```
+## (e) Combine vectors x and y into one vector
+```{r}
+c(x, y)
+```
+## (f) Repeat the second and third elements of x three times
+```{r}
+rep(x[2:3], times = 3)
+```
+## (g) Print a logical vector that is TRUE if the element z is less than 7 and FALSE otherwise
+```{r}
+z < 7
+```
+## (h) Print the values of y such that those elements were TRUE from the previous logical vector
+```{r}
+y[z < 7]
+```
+## (i) Print a logical vector that is TRUE if the element in names.1 comes before the same element in names.2 alphabetically
+```{r}
+names.1 < names.2
+```
+## (j) Raise each element of z to the third power
+```{r}
+z^3
+```
+
