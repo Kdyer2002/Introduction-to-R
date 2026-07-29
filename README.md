@@ -14,7 +14,6 @@ This repository contains programming projects and assignments completed througho
 - Week 8: Data Wrangling with dplyr
 - Week 9: Data Visualization with ggplot2
 - Week 10: Advanced Data Visualization
-- Week 11: Data Merging and Tidy Data
 
 ## Technical Skills
 
