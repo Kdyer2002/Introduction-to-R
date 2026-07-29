@@ -1,0 +1,102 @@
+---
+title: "HW10"
+author: "Kayla Dyer"
+date: "2025-11-21"
+output: word_document
+---
+## 1a.Load the tidyverse package. Type str(mtcars). This data set contains 32 observations and 11 variables. The variable we are going to use is called mpg. Also, type row.names(mtcars). Each observation is a type of car and the row names are the name of the car.
+```{r}
+library(tidyverse)
+str(mtcars)
+row.names(mtcars)
+```
+## 1b. Type: mtcars$car.name <- row.names(mtcars). This creates a new variable called car.name. We have to do this because we will lose the row names in the next step.
+```{r}
+mtcars$car.name <- row.names(mtcars)
+```
+## 1c. Next, we are going to do is add a column to mtcars which is the standardized score of mpg for each car, rounded to two decimal places. Recall from STA 503 that we can use the mutate( ) function to add a column that is a function of already existing columns. Type: mtcars <- mutate(mtcars, mpg.z = round((mpg - mean(mpg))/sd(mpg), 2)). Now, if you type str(mtcars) you will have 13 variables. The last variable is called mpg.z
+```{r}
+mtcars <- mutate(mtcars, mpg.z = round((mpg - mean(mpg))/sd(mpg), 2))
+str(mtcars)
+```
+## 1d. Next, we will create another variable called mpg.type which has value below if the z-score computed from the previous step is less than 0 (i.e. that car gets less than average mpg) and above otherwise. Type: mtcars <- mutate(mtcars, mpg.type = ifelse(mpg.z < 0, "below", "above")). Now we have 14 variables!
+```{r}
+mtcars <- mutate(mtcars, mpg.type = ifelse(mpg.z < 0, "below", "above"))
+ str(mtcars)
+```
+## 1e. Now, let’s sort the 32 cars based on their value of mpg.z. Type: mtcars <- mtcars[order(mtcars$mpg.z), ]. Type head(mtcars) and tail(mtcars). Notice that it sorted them observations from smallest to biggest!
+```{r}
+mtcars <- mtcars[order(mtcars$mpg.z), ]
+head(mtcars)
+tail(mtcars)
+```
+## 1f. Finally, type the following: mtcars$car.name <- factor(mtcars$car.name, levels = mtcars$car.name). The reason we had to do this is because we would have lost the ordering from the previous step because R will sort character values (what our car.name was before this step) alphabetically.
+```{r}
+mtcars$car.name <- factor(mtcars$car.name, levels = mtcars$car.name)
+```
+## 1g. Type the following in to R:
+```{r}
+ggplot(mtcars, aes(x = car.name, y = mpg.z, label = mpg.z)) +   # set up the plot with car name on x, mpg.z on y, labels as mpg.z
+  geom_point(aes(col = mpg.type), size = 6) +                   # make large points colored by mpg.type (above/below)
+  scale_color_manual(name = "Mileage",                          # customize the legend title
+                     labels = c("Above Average", "Below Average"), # names for the two groups
+                     values = c("green", "red")) +              # manually assign colors to above/below
+  geom_text(color = "black", size = 2) +                        # add black text labels showing z-scores
+  labs(title = "Diverging Dot Plot",                            # main plot title
+       subtitle = "Standardized Miles Per Gallon",              # subtitle
+       x = "Car Name",                                          # x-axis label
+       y = "Z-score") +                                         # y-axis label
+  coord_flip()                                                  # flip the axes so car names are easier to read
+```
+
+## 2. On the next page there are four plots. Write R code that re-creates each of the four plots. You do NOT need to include them all in one plotting window. Type the following into R. states <- data.frame(state.abb, state.center, state.region, state.division, state.x77) str(states)
+```{r}
+library(ggplot2)
+states <- data.frame(state.abb, state.center, state.region, state.division, state.x77)
+str(states)
+```
+
+## Plot A
+```{r}
+ggplot(states, aes(x = x, y = y)) +
+  geom_point(aes(size = Population, color = state.region), alpha = 0.7) +
+  geom_text(aes(label = state.abb), vjust = -0.5) +
+  geom_smooth(aes(color = state.region), method = "lm", se = FALSE, size = 1) +
+  scale_size(range = c(2, 8), name = "Population") +
+  labs(x = "Latitude", y = "", color = "state.region")
+```
+
+## Plot B
+```{r}
+meanFrost <- mean(states$Frost)
+sdFrost   <- sd(states$Frost)
+
+ggplot(states, aes(x = Frost)) +
+  geom_histogram(aes(y = ..density..),
+                 bins = 7, fill = "grey80", color = "red", alpha = 0.6) +
+  geom_density(size = 1) +
+  geom_rect(aes(xmin = meanFrost - sdFrost,
+                xmax = meanFrost + sdFrost,
+                ymin = 0, ymax = Inf),
+            fill = "blue", alpha = 0.5, inherit.aes = FALSE) +
+  labs(x = "Number of Days with Frost", y = "Density")
+```
+
+## Plot C
+```{r}
+ggplot(states, aes(x = Frost, y = state.region)) +
+  geom_boxplot(fill = "white") +
+  geom_jitter(height = 0.1, color = "grey40", alpha = 0.7) +
+  stat_summary(fun = mean, geom = "point", color = "red", size = 3) +
+  labs(x = "Number of Days with Frost", y = "State Region")
+```
+
+## Plot D
+```{r}
+ggplot(states, aes(x = state.region, fill = state.division)) +
+  geom_bar() +
+  labs(title = "Number of States in Each Division per Region",
+       x = "State Region", y = "count") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
