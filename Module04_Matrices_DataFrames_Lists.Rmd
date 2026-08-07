@@ -1,0 +1,133 @@
+---
+title: "Week 4 Lecture Notes"
+author: "Drew Crossett"
+date: "9/15/2025"
+output: word_document
+---
+
+## Slide 5
+
+We can make matrices using the ```matrix( )``` function. The arguments are a vector to coerced into a matrix, the number of row, number of columns, and whether you went to fill in the matrix by row or column. All elements of a matrix have to be the same type. If they are not, then R will try coerce them into the same type or will give you an error.
+
+```{r}
+x <- 1:12 
+y <- seq(0,1,length=12)
+matrix(data = x, nrow = 4, ncol = 3, byrow = FALSE) 
+
+matrix(data = x, nrow = 4, ncol = 3, byrow = TRUE) 
+
+matrix(data = x, nrow = 3, ncol = 4, byrow = TRUE) 
+
+
+cbind(x,y)
+rbind(x,y)
+
+mat <- matrix(data = x, nrow = 4, ncol = 3, byrow = FALSE)
+
+```
+
+## Slides 6 - 7
+
+We access elements of a matrix similar to how we accessed elements of a vector. But now we have to specify which rows AND columns we want, separated by a comma. The vector (or scalar) before the comma (but inside the square brackets) are the row(s) and the vector (or scalar) after the comma are the column(s). If you leave one blank, then that means "give me all the rows/columns." You can also remove rows/columns using the subtraction sign.
+
+```{r}
+mat[2, 3] 
+
+mat[c(2, 4), 3] 
+
+mat[c(2, 4), 1:3]  
+
+mat[-1, 2:3] 
+
+mat[c(2, 4), -c(1, 3)] 
+
+mat[c(1, 3), ] 
+
+mat[ , 1:2] 
+```
+
+## Slide 8
+
+R is vectorized so it will try to do things element-by-element. This is great for vectors, but not great for matrix multiplication. Have to use special symbols for some matrix algebra.
+
+```{r}
+mat2 <- matrix(data = rep(x = 1:4, times = 3), nrow = 4, ncol = 3, byrow = FALSE) 
+
+mat + mat2 
+
+mat*mat2 
+
+mat %*% t(mat2) 
+```
+## Slide 9
+
+Sometimes we want to apply a function to every row and column in a matrix. The ```apply( )``` function allows us to this easily. The first argument is the matrix, the second is which margin (rows = 1, columns = 2), and the third argument is the function you want to apply to every row or column.
+
+```{r}
+apply(X = mat, MARGIN = 1, FUN = sum) 
+
+apply(X = mat, MARGIN = 2, FUN = sum) 
+```
+
+## Slide 10
+
+Data frames are similar to matrices but are more flexible. Every element in a matrix must have the same value type. Data frames can have different columns with different value types. Each column of a data frame must be the same value type, but the columns don't have to be the same. We access elements from a data frame the same way we do matrices.
+
+```{r}
+x <- seq(from = 0, to = 35, by = 7) 
+y <- c("Bills", "Eagles", "Eagles", "Bills", "Bills", "Eagles") 
+
+dat <- data.frame(x, y) 
+```
+
+## Slides 11 - 12
+
+By default, R will name the columns of the data frame as however they were input into the ```data.frame( )``` function (so, ```x``` and ```y``` in our example). You can change the names using the ```names( )``` or ```colnames( )``` functions. You can also access specific columns of data frames by their name using the ```\$``` symbol. This will give you a vector (that column), which you can then manipulate just like any other vector.
+
+The ```str( )``` function gives you the *structure* of the data frame. This will tell you the number of rows (called *obs.*), the number of columns (called *variables*) along with some information about each column. It gives you the names of the columns, their value type, and the first few values.
+
+```{r}
+colnames(dat) <- c("Points", "Team") 
+
+str(dat) 
+
+dat$Team 
+
+dat$Team[ 1:3 ] 
+```
+
+
+## Slide 13
+
+You can also combine matrices and data frames by rows and columns. The dimensions have to match up or it will give you an error.
+
+```{r}
+cbind(mat, mat2) 
+
+rbind(mat, mat2) 
+
+dat1 <- data.frame(dat, c(TRUE, FALSE, FALSE, TRUE, TRUE, FALSE)) 
+
+colnames(dat1)[3] <- "Logical"
+```
+
+
+## Slide 14
+
+Lists are even more general objects than data frames.
+
+```{r}
+list.obj <- list(x, y, dat1) 
+
+names(list.obj) <- c("Points", "Teams", "Data_Frame")
+  str(list.obj)
+
+list.obj[[1]]
+  list.obj$Points
+  
+list.obj[[2]]
+  list.obj$Teams
+  
+list.obj[[3]]
+  list.obj$Data_Frame  
+```

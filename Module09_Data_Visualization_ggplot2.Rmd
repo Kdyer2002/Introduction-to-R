@@ -1,0 +1,43 @@
+---
+title: "HW9"
+author: "Kayla Dyer"
+date: "2025-11-06"
+output: word_document
+---
+## 1. Read Lecture7data.csv into R. Call it mpg. This is the same data set we have used in the notes for the last two weeks. Load the tidyverse package.
+```{r}
+setwd("~/Desktop/STA 503/Week 7")
+library(tidyverse)
+mpg <- read.csv(file = "Lecture7data.csv")
+names(mpg)
+```
+## 2. Use the ggplot2 package to re-create the R Code necessary to generate the six graphs on the next page. The three variables used are displ, hwy, and drv. You will create each graph separately.You do NOT need them all within the same figure.
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+```
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  geom_smooth(aes(group = drv), se = FALSE)
+```
+```{r}
+ggplot(mpg, aes(displ, hwy, color = drv)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+```
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = drv)) +
+  geom_smooth(se = FALSE)
+```
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = drv)) +
+  geom_smooth(aes(linetype = drv), se = FALSE)
+```
+```{r}
+ggplot(mpg, aes(displ, hwy, color = drv)) +
+  geom_point()
+```

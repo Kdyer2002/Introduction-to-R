@@ -1,0 +1,37 @@
+---
+title: "HW5"
+author: "Kayla Dyer"
+date: "2025-09-30"
+output: word_document
+---
+## 1. Set your working directory to folder that contains documents for this class. Copy this code into a code chunk in your R Markdown file.
+```{r}
+setwd("~/Desktop/STA 503/Week 5")
+```
+## 2. Create a data frame called data. The data frame should be two variables: x and y, x has ten numeric values and y has ten character values.
+```{r}
+x <- 1:10
+y <- c("A","B","C","D","E","F","G","H","I","J")
+data <- data.frame(x = x,y = y)
+str(data)
+```
+## 3. Write this data frame to a .csv file named HW5data.csv that does NOT include row names.
+```{r}
+write.csv(x = data, file = "HW5data.csv", row.names = FALSE)
+```
+## 4. Read HW5data.csv into R and call it data.hw5. Put this code in a code chunk that does NOT print the R code in the final document.
+```{r, echo=FALSE}
+data.hw5 <- read.csv(file = "HW5data.csv")
+```
+## 5. Look at structure of data.hw5. Put this code in a different code chunk and make sure the R code is printed in the final document.
+```{r}
+str(data.hw5)
+```
+## 6. Use the $ symbol and square brackets to print the second, third, and ninth values of x.
+```{r}
+data.hw5$x[c(2, 3, 9)]
+```
+## 7.Use the $ symbol and square brackets to print all the values in x such that those same elements are equal to one of the values in y that you created in part 3. Use the comparison operators.
+```{r}
+data.hw5$x[data.hw5$y == "D"]
+```

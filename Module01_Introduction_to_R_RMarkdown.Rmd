@@ -1,0 +1,12 @@
+---
+title: "HW 1"
+author: "Kayla Dyer"
+date: "2025-09-02"
+output: word_document
+---
+## Question 1
+```{r}
+x <- 4 * 5
+x
+```
+I created an object called x that is the product of 4 and 5. The value of x is `r x`.
