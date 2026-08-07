@@ -5,15 +5,15 @@ This repository contains programming projects and assignments completed througho
 ## Course Topics
 
 - Module 1: R, RStudio, and R Markdown
-- Week 2: Functions, Vectors, and Data Types
-- Week 3: Vector Operations
-- Week 4: Matrices, Data Frames, and Lists
-- Week 5: Data Import and R Markdown
-- Week 6: Missing Data and Basic Statistics
-- Week 7: Tidyverse Fundamentals
-- Week 8: Data Wrangling with dplyr
-- Week 9: Data Visualization with ggplot2
-- Week 10: Advanced Data Visualization
+- Module 2: Functions, Vectors, and Data Types
+- Module 3: Vector Operations
+- Module 4: Matrices, Data Frames, and Lists
+- Module 5: Data Import and R Markdown
+- Module 6: Missing Data and Basic Statistics
+- Module 7: Tidyverse Fundamentals
+- Module 8: Data Wrangling with dplyr
+- Module 9: Data Visualization with ggplot2
+- Module 10: Advanced Data Visualization
 
 ## Technical Skills
 
