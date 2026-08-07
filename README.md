@@ -4,7 +4,7 @@ This repository contains programming projects and assignments completed througho
 
 ## Course Topics
 
-- Week 1: R, RStudio, and R Markdown
+- Module 1: R, RStudio, and R Markdown
 - Week 2: Functions, Vectors, and Data Types
 - Week 3: Vector Operations
 - Week 4: Matrices, Data Frames, and Lists
